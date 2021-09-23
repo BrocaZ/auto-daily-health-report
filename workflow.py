@@ -47,18 +47,18 @@ except KeyError:
     sys.exit(1)
 
 try:
-    today_log, status = check_recent(username, password)
+    today_log, status = check_recent(username, password,True,username,password)
     if status == 0 and today_log["today"]:
         print("Already reported today :)")
         sys.exit(0)
 
-    response, status = health_report(username, password)
+    response, status = health_report(username, password,True,username,password)
     if status != 0:
         print("Report error, reason: " + response["reason"])
         report_with_server_chan(False, response["reason"])
         sys.exit(1)
 
-    today_log, status = check_recent(username, password)
+    today_log, status = check_recent(username, password,True,username,password)
     if status == 0:
         if today_log["today"]:
             print("Automatically reported successfully!")
